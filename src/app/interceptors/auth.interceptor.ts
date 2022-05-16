@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {
+  HttpHeaders,
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor, HttpErrorResponse, HttpClient
 } from '@angular/common/http';
 import {catchError, Observable, switchMap, throwError} from 'rxjs';
-
+ 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   static accessToken = '';
@@ -32,6 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
             return next.handle(request.clone({
               setHeaders: {
+                
                 Authorization: `Bearer ${AuthInterceptor.accessToken}`
               }
             }));
